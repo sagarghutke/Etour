@@ -28,7 +28,7 @@ namespace EtourBackFinal.Controllers
           {
               return NotFound();
           }
-            return await _context.CategoryMaster.Where((p)=>p.SubcategoryId=="").ToListAsync();
+            return await _context.CategoryMaster.Where((p)=>p.SubCategoryId==null).ToListAsync();
         }
 
         // GET: api/Category_Master/5
@@ -46,8 +46,12 @@ namespace EtourBackFinal.Controllers
                 return NotFound();
             }
 
-            return await _context.CategoryMaster.Where((p) => p.SubcategoryId == category_Master.CategoryId).ToListAsync();
+            return await _context.CategoryMaster.Where((p) => p.SubCategoryId == category_Master.CategoryId).ToListAsync();
         }
+
+      
+
+
 
         // PUT: api/Category_Master/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

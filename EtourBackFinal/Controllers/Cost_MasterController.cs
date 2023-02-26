@@ -80,6 +80,30 @@ namespace EtourBackFinal.Controllers
             return NoContent();
         }
 
+    /*    //GET:api/Cost_Master/200000/250000
+        [HttpGet("{minprice}/{maxprice}")]
+        public async Task<ActionResult<IEnumerator<Cost_Master>>> Get_CostMaster(double minprice, double maxprice)
+        {
+            if(_context.CostMaster == null)
+            {
+                return NotFound();
+            }
+            var query = from cost in _context.CostMaster
+                        join category in _context.CategoryMaster on cost.MasterId equals category.MasterId
+                        where cost.Cost >= minprice && cost.Cost<= maxprice
+                        select new
+                        {
+                            category.MasterId,
+                            category.SubcategoryId,
+                            category.CategoryName,
+                            cost.Cost                           
+                        };
+            var result = await query.ToListAsync();
+
+            return Ok(result);
+        }
+*/
+
         // POST: api/Cost_Master
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

@@ -28,6 +28,16 @@ namespace EtourBackFinal.Controllers
           {
               return NotFound();
           }
+
+            /*var res = from category in _context.CategoryMaster
+                      join cost in _context.CostMaster on category.MasterId equals cost.MasterId
+                      select new
+                      {
+                          category.CategoryId,
+                          category.CategoryName,
+                          cost
+
+                      };*/
             return await _context.BookingHeader.ToListAsync();
         }
 
@@ -40,11 +50,38 @@ namespace EtourBackFinal.Controllers
               return NotFound();
           }
             var booking_Header = await _context.BookingHeader.FindAsync(id);
+            //var res;
 
-            if (booking_Header == null)
+            if(booking_Header == null)
             {
                 return NotFound();
             }
+
+           /* if (booking_Header == null)
+            {
+                // return NotFound();
+                var res = from category in _context.CategoryMaster
+                      join cost in _context.CostMaster on category.MasterId equals cost.MasterId
+                      where cost.MasterId == id
+                      select new
+                      {
+                          category.CategoryId,
+                          category.CategoryName,
+                          cost
+
+                      };
+                return Ok(res.ToList());
+            }*/
+          /*  var res = from category in _context.CategoryMaster
+                      join cost in _context.CostMaster on category.MasterId equals cost.MasterId
+                      where cost.MasterId == id
+                      select new
+                      {
+                          category.CategoryId,
+                          category.CategoryName,
+                          cost
+
+                      };*/
 
             return booking_Header;
         }

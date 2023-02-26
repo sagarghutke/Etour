@@ -5,6 +5,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace EtourBackFinal.Model
 {
+    public enum Gender
+    {
+        Male = 'M',
+        Female = 'F'
+    }
+
     public class Customer_Master
     {
         [Key]
@@ -16,8 +22,8 @@ namespace EtourBackFinal.Model
         [NotNull]
         public string? CustomerName { get; set; }
 
-        [StringLength(10)]
-        public string? UserName { get;set; }
+       /* [StringLength(10)]
+        public string? UserName { get;set; }*/
 
         [EmailAddress]
         [Required]
@@ -30,9 +36,28 @@ namespace EtourBackFinal.Model
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [DataType(DataType.DateTime)]
-        public DateTime Create_time { get; set; }
+        [Required]
+        [RegularExpression(@"^[0-9]*$")]
+        [StringLength(10,ErrorMessage ="Enter valid phone number")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        public int Age { get; set; }
+
+        [Required]
+        public string Address { get;set; }
+
+        [Required]
+        public int CountryCode { get; set; }
+
+        [Required]
+        public string IdVerificationType { get; set; }
+
+        [Required]
+        public Gender Gender { get; set; }
 
         public ICollection<Booking_Header>? BookingHeaders { get; set; }
+
+        public ICollection<Passenger_Master>? Passengers { get; set; }
     }
 }

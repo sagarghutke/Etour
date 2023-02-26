@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EtourBackFinal.Migrations
 {
     /// <inheritdoc />
-    public partial class ETourFirst : Migration
+    public partial class ETourV100 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,30 +18,14 @@ namespace EtourBackFinal.Migrations
                     MasterId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryId = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
-                    SubcategoryId = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    SubCategoryId = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true),
                     CategoryName = table.Column<string>(type: "nvarchar(45)", maxLength: 45, nullable: false),
+                    CategoryImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ToNewTab = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CategoryMaster", x => x.MasterId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CostMasters",
-                columns: table => new
-                {
-                    CostId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Cost = table.Column<double>(type: "float", nullable: false),
-                    SinglePersonCost = table.Column<double>(type: "float", nullable: false),
-                    ExtraPersonCost = table.Column<double>(type: "float", nullable: false),
-                    ChildWithBed = table.Column<double>(type: "float", nullable: false),
-                    ChildWithoutBed = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CostMasters", x => x.CostId);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,10 +35,14 @@ namespace EtourBackFinal.Migrations
                     CustomerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    Create_time = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    PhoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CountryCode = table.Column<int>(type: "int", nullable: false),
+                    IdVerificationType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,7 +50,32 @@ namespace EtourBackFinal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DateMasters",
+                name: "CostMaster",
+                columns: table => new
+                {
+                    CostId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Cost = table.Column<double>(type: "float", nullable: false),
+                    SinglePersonCost = table.Column<double>(type: "float", nullable: false),
+                    ExtraPersonCost = table.Column<double>(type: "float", nullable: false),
+                    ChildWithBed = table.Column<double>(type: "float", nullable: false),
+                    ChildWithoutBed = table.Column<double>(type: "float", nullable: false),
+                    ValidFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ValidTo = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MasterId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CostMaster", x => x.CostId);
+                    table.ForeignKey(
+                        name: "FK_CostMaster_CategoryMaster_MasterId",
+                        column: x => x.MasterId,
+                        principalTable: "CategoryMaster",
+                        principalColumn: "MasterId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DateMaster",
                 columns: table => new
                 {
                     DepartureId = table.Column<int>(type: "int", nullable: false)
@@ -70,17 +83,16 @@ namespace EtourBackFinal.Migrations
                     DepartureDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NoOfDays = table.Column<int>(type: "int", nullable: false),
-                    MasterId = table.Column<int>(type: "int", nullable: false)
+                    MasterId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DateMasters", x => x.DepartureId);
+                    table.PrimaryKey("PK_DateMaster", x => x.DepartureId);
                     table.ForeignKey(
-                        name: "FK_DateMasters_CategoryMaster_MasterId",
+                        name: "FK_DateMaster_CategoryMaster_MasterId",
                         column: x => x.MasterId,
                         principalTable: "CategoryMaster",
-                        principalColumn: "MasterId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "MasterId");
                 });
 
             migrationBuilder.CreateTable(
@@ -89,8 +101,8 @@ namespace EtourBackFinal.Migrations
                 {
                     ItneraryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NoOfDays = table.Column<int>(type: "int", nullable: false),
-                    Itnearydetails = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    TourDuration = table.Column<int>(type: "int", nullable: false),
+                    Itnerarydetails = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     MasterId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -123,39 +135,38 @@ namespace EtourBackFinal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookingHeaders",
+                name: "BookingHeader",
                 columns: table => new
                 {
                     BookingId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NoOfPassenger = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<double>(type: "float", nullable: false),
+                    TourAmount = table.Column<double>(type: "float", nullable: false),
                     Taxes = table.Column<double>(type: "float", nullable: false),
                     TotalAmount = table.Column<double>(type: "float", nullable: false),
                     MasterId = table.Column<int>(type: "int", nullable: true),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
-                    DepartureId = table.Column<int>(type: "int", nullable: false)
+                    DepartureId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookingHeaders", x => x.BookingId);
+                    table.PrimaryKey("PK_BookingHeader", x => x.BookingId);
                     table.ForeignKey(
-                        name: "FK_BookingHeaders_CategoryMaster_MasterId",
+                        name: "FK_BookingHeader_CategoryMaster_MasterId",
                         column: x => x.MasterId,
                         principalTable: "CategoryMaster",
                         principalColumn: "MasterId");
                     table.ForeignKey(
-                        name: "FK_BookingHeaders_CustomerMaster_CustomerId",
+                        name: "FK_BookingHeader_CustomerMaster_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "CustomerMaster",
                         principalColumn: "CustomerId");
                     table.ForeignKey(
-                        name: "FK_BookingHeaders_DateMasters_DepartureId",
+                        name: "FK_BookingHeader_DateMaster_DepartureId",
                         column: x => x.DepartureId,
-                        principalTable: "DateMasters",
-                        principalColumn: "DepartureId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalTable: "DateMaster",
+                        principalColumn: "DepartureId");
                 });
 
             migrationBuilder.CreateTable(
@@ -166,39 +177,49 @@ namespace EtourBackFinal.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PassengerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Passengertype = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    PassengerAmount = table.Column<double>(type: "float", nullable: false),
-                    BookingId = table.Column<int>(type: "int", nullable: false)
+                    Gender = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    DepartueId = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BookingId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Passengers", x => x.PassengerId);
                     table.ForeignKey(
-                        name: "FK_Passengers_BookingHeaders_BookingId",
+                        name: "FK_Passengers_BookingHeader_BookingId",
                         column: x => x.BookingId,
-                        principalTable: "BookingHeaders",
-                        principalColumn: "BookingId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalTable: "BookingHeader",
+                        principalColumn: "BookingId");
+                    table.ForeignKey(
+                        name: "FK_Passengers_CustomerMaster_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "CustomerMaster",
+                        principalColumn: "CustomerId");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookingHeaders_CustomerId",
-                table: "BookingHeaders",
+                name: "IX_BookingHeader_CustomerId",
+                table: "BookingHeader",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookingHeaders_DepartureId",
-                table: "BookingHeaders",
+                name: "IX_BookingHeader_DepartureId",
+                table: "BookingHeader",
                 column: "DepartureId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookingHeaders_MasterId",
-                table: "BookingHeaders",
+                name: "IX_BookingHeader_MasterId",
+                table: "BookingHeader",
                 column: "MasterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DateMasters_MasterId",
-                table: "DateMasters",
+                name: "IX_CostMaster_MasterId",
+                table: "CostMaster",
+                column: "MasterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DateMaster_MasterId",
+                table: "DateMaster",
                 column: "MasterId");
 
             migrationBuilder.CreateIndex(
@@ -215,13 +236,18 @@ namespace EtourBackFinal.Migrations
                 name: "IX_Passengers_BookingId",
                 table: "Passengers",
                 column: "BookingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Passengers_CustomerId",
+                table: "Passengers",
+                column: "CustomerId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CostMasters");
+                name: "CostMaster");
 
             migrationBuilder.DropTable(
                 name: "ItneraryMaster");
@@ -233,13 +259,13 @@ namespace EtourBackFinal.Migrations
                 name: "Passengers");
 
             migrationBuilder.DropTable(
-                name: "BookingHeaders");
+                name: "BookingHeader");
 
             migrationBuilder.DropTable(
                 name: "CustomerMaster");
 
             migrationBuilder.DropTable(
-                name: "DateMasters");
+                name: "DateMaster");
 
             migrationBuilder.DropTable(
                 name: "CategoryMaster");

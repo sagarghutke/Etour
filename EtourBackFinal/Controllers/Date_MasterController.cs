@@ -48,6 +48,25 @@ namespace EtourBackFinal.Controllers
 
             return date_Master;
         }
+/*
+        //GET:api/Date_Master/2022-12-24/2023-04-25
+        [HttpGet("{startdate}/{enddate}")]
+        public async Task<ActionResult<Date_Master>> GetDate_Master(DateTime startdate , DateTime enddate)
+        {
+            if(_context.DateMaster == null)
+            {
+                return NotFound();
+            }
+            var res = from date in _context.DateMaster
+                      join category in _context.CategoryMaster on date.MasterId equals category.MasterId
+                      where date.DepartureDate == startdate || date.EndDate == enddate
+                      select new 
+                      {
+                          category
+                      };
+            return Ok(res.ToList());
+
+        }*/
 
         // PUT: api/Date_Master/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

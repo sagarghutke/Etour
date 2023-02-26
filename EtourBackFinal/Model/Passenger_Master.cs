@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace EtourBackFinal.Model
 {
@@ -15,12 +17,26 @@ namespace EtourBackFinal.Model
         [Required]
         public DateTime Birthdate { get; set; }
 
-        [Required]
+        /*[Required]
         [StringLength(10,ErrorMessage ="Length should be less than 10")]
-        public string Passengertype { get; set; }
+        public string Passengertype { get; set; }*/
 
-        [Required]
-        public double PassengerAmount { get;set; }
+        [Required,NotNull]
+        [StringLength(6)]
+        public string Gender { get; set; }
+
+        /*[Required]
+        public double PassengerCost { get;set; }*/
+
+        public int? CustomerId { get; set; }    
+
+        [ForeignKey("CustomerId")]
+        public Customer_Master? Customer { get; set; }
+
+        public DateTime? DepartueId { get; set; }
+
+
+
 
         //[Required]  
         public int? BookingId { get; set; }

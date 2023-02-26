@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EtourBackFinal.Migrations
 {
     [DbContext(typeof(ETourContext))]
-    [Migration("20230222111757_ETourNine")]
-    partial class ETourNine
+    [Migration("20230226085656_ETour-V-1.0.0")]
+    partial class ETourV100
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,9 +32,6 @@ namespace EtourBackFinal.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"));
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
 
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
@@ -55,6 +52,9 @@ namespace EtourBackFinal.Migrations
                         .HasColumnType("float");
 
                     b.Property<double>("TotalAmount")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TourAmount")
                         .HasColumnType("float");
 
                     b.HasKey("BookingId");
@@ -81,13 +81,15 @@ namespace EtourBackFinal.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
+                    b.Property<string>("CategoryImage")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasMaxLength(45)
                         .HasColumnType("nvarchar(45)");
 
-                    b.Property<string>("SubcategoryId")
-                        .IsRequired()
+                    b.Property<string>("SubCategoryId")
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
@@ -146,8 +148,15 @@ namespace EtourBackFinal.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
-                    b.Property<DateTime>("Create_time")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CountryCode")
+                        .HasColumnType("int");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
@@ -159,12 +168,20 @@ namespace EtourBackFinal.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdVerificationType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
@@ -208,7 +225,7 @@ namespace EtourBackFinal.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItneraryId"));
 
-                    b.Property<string>("Itnearydetails")
+                    b.Property<string>("Itnerarydetails")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -216,7 +233,7 @@ namespace EtourBackFinal.Migrations
                     b.Property<int?>("MasterId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NoOfDays")
+                    b.Property<int>("TourDuration")
                         .HasColumnType("int");
 
                     b.HasKey("ItneraryId");
@@ -262,21 +279,26 @@ namespace EtourBackFinal.Migrations
                     b.Property<int?>("BookingId")
                         .HasColumnType("int");
 
-                    b.Property<double>("PassengerAmount")
-                        .HasColumnType("float");
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DepartueId")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
 
                     b.Property<string>("PassengerName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Passengertype")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
                     b.HasKey("PassengerId");
 
                     b.HasIndex("BookingId");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Passengers");
                 });
@@ -344,7 +366,13 @@ namespace EtourBackFinal.Migrations
                         .WithMany("Passengers")
                         .HasForeignKey("BookingId");
 
+                    b.HasOne("EtourBackFinal.Model.Customer_Master", "Customer")
+                        .WithMany("Passengers")
+                        .HasForeignKey("CustomerId");
+
                     b.Navigation("BookingHeader");
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("EtourBackFinal.Model.Booking_Header", b =>
@@ -368,6 +396,8 @@ namespace EtourBackFinal.Migrations
             modelBuilder.Entity("EtourBackFinal.Model.Customer_Master", b =>
                 {
                     b.Navigation("BookingHeaders");
+
+                    b.Navigation("Passengers");
                 });
 
             modelBuilder.Entity("EtourBackFinal.Model.Date_Master", b =>

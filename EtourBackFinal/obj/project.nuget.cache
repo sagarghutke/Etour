@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rQc9r+CTiSDzDjIDmZcfwuqyMDLzuQtkkehMBvMgGZU9gedm/UWpyywle5O8gcc0/0IMRLAEitUn7+thTt2Y7g==",
+  "dgSpecHash": "qD9/zWmhhb4vk7OwBV4e2TpFSkNswekYxj+DnTW0heRAl7QEEaF3ad/eTFZa8cg+ppyeOYpF+li84WSEh2lhig==",
   "success": true,
-  "projectFilePath": "E:\\C#\\EtourBackFinal\\EtourBackFinal.csproj",
+  "projectFilePath": "E:\\C#\\ETOUR\\EtourBackFinal\\EtourBackFinal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sagar\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\sagar\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

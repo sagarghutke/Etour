@@ -49,6 +49,29 @@ namespace EtourBackFinal.Controllers
             return passenger_Master;
         }
 
+        //GET:api/Passenger_Master/1/2022-02-22
+        [HttpGet("{id}/{date}")]
+        public async Task<ActionResult<Passenger_Master>> GetPassenger_Master(int id , DateTime date)
+        {
+            if(_context.Passengers ==  null)
+            {
+                return NotFound();
+            }
+
+            var passenger_Master  = await _context.Passengers.Where((p)=> p.CustomerId == id && p.DepartueId == date).FirstOrDefaultAsync();
+
+            /*if(passenger_Master ==  null)
+            {
+                return NotFound();
+            }*/
+
+            return Ok(passenger_Master);
+        }
+
+
+
+
+
         // PUT: api/Passenger_Master/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\C#\\EtourBackFinal\\EtourBackFinal.csproj": {}
+    "E:\\C#\\ETOUR\\EtourBackFinal\\EtourBackFinal.csproj": {}
   },
   "projects": {
-    "E:\\C#\\EtourBackFinal\\EtourBackFinal.csproj": {
+    "E:\\C#\\ETOUR\\EtourBackFinal\\EtourBackFinal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\C#\\EtourBackFinal\\EtourBackFinal.csproj",
+        "projectUniqueName": "E:\\C#\\ETOUR\\EtourBackFinal\\EtourBackFinal.csproj",
         "projectName": "EtourBackFinal",
-        "projectPath": "E:\\C#\\EtourBackFinal\\EtourBackFinal.csproj",
+        "projectPath": "E:\\C#\\ETOUR\\EtourBackFinal\\EtourBackFinal.csproj",
         "packagesPath": "C:\\Users\\sagar\\.nuget\\packages\\",
-        "outputPath": "E:\\C#\\EtourBackFinal\\obj\\",
+        "outputPath": "E:\\C#\\ETOUR\\EtourBackFinal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sagar\\AppData\\Roaming\\NuGet\\NuGet.Config",

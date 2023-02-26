@@ -49,6 +49,22 @@ namespace EtourBackFinal.Controllers
             return customer_Master;
         }
 
+
+       /* //GET: api/Customer_Master/7869285852/Sagar2123
+        [HttpGet("{phoneNo}/{password}")]
+        public async Task<ActionResult<IEnumerable<Customer_Master>>> GetCustomer_Master(string phoneNo, string password)
+        {
+            if (_context.CustomerMaster == null)
+            {
+                return NotFound();
+            }
+
+            var customer_Master = from c in _context.CustomerMaster where c.PhoneNo == phoneNo  && c.Password == password select c;
+
+            return Ok(customer_Master);
+        }*/
+
+     
         // PUT: api/Customer_Master/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -94,6 +110,31 @@ namespace EtourBackFinal.Controllers
 
             return CreatedAtAction("GetCustomer_Master", new { id = customer_Master.CustomerId }, customer_Master);
         }
+
+
+/*
+
+        // POST: api/Customer_Master/Login
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("Login")]
+        public async Task<ActionResult<Customer_Master>> Login(Customer_Master customer_Master)
+        {
+            if (_context.CustomerMaster == null)
+            {
+                return Problem("Entity set 'ETourContext.CustomerMaster'  is null.");
+            }
+            var query = from customer in _context.CustomerMaster
+                         where customer.CustomerId ==  customer_Master.CustomerId
+                         select new { customer };
+
+            var result =  await query.ToListAsync();
+            if(result == null)
+            {
+                return NoContent();
+            }
+
+            return Ok(result);
+        }*/
 
         // DELETE: api/Customer_Master/5
         [HttpDelete("{id}")]

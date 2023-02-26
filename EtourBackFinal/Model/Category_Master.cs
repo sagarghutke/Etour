@@ -15,15 +15,18 @@ namespace EtourBackFinal.Model
         [NotNull]
         public string? CategoryId { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(5)]
         //[NotNull]
-        public string? SubcategoryId { get; set; }
+        public string? SubCategoryId { get; set; }
 
         [Required]
         [StringLength(45)]
         [NotNull]
         public string? CategoryName{get;set;}
+
+        
+        public string? CategoryImage { get; set; }
 
         [Required]
         public bool ToNewTab { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using EtourBackFinal.Model;
 
 namespace EtourBackFinal.Model
 {
@@ -25,6 +26,10 @@ namespace EtourBackFinal.Model
         public virtual DbSet<Date_Master> DateMaster { get; set; }
 
         public virtual DbSet<Itnerary_Master> ItneraryMaster { get; set;}
+
+       /* public DbSet<EtourBackFinal.Model.Search> Search { get; set; } = default!;
+
+        public DbSet<EtourBackFinal.Model.Login> Login { get; set; } = default!;*/
 
        
     }

@@ -10,11 +10,11 @@ namespace EtourBackFinal.Model
         public int ItneraryId { get; set; }
 
         [Required]
-        public int NoOfDays { get; set; }
+        public int TourDuration { get; set; }
 
         [StringLength(200)]
         [Required]
-        public string? Itnearydetails { get; set; }
+        public string? Itnerarydetails { get; set; }
 
         public int? MasterId { get; set; }
 

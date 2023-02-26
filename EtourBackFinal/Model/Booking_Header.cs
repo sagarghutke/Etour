@@ -16,7 +16,7 @@ namespace EtourBackFinal.Model
         public int NoOfPassenger { get; set; }
 
         [Required]
-        public double Amount { get; set; }
+        public double TourAmount { get; set; }
 
         [Required]
         public double Taxes { get; set; }
