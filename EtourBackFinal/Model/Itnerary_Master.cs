@@ -12,7 +12,7 @@ namespace EtourBackFinal.Model
         [Required]
         public int TourDuration { get; set; }
 
-        [StringLength(200)]
+        //[StringLength(Max)]
         [Required]
         public string? Itnerarydetails { get; set; }
 

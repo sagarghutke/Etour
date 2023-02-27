@@ -44,6 +44,7 @@ namespace EtourBackFinal.Controllers
             var res = from itinerary in _context.ItneraryMaster
                       join category in _context.CategoryMaster on itinerary.MasterId equals category.MasterId
                       join cost in _context.CostMaster on itinerary.MasterId equals cost.MasterId
+                      join date in _context.DateMaster on itinerary.MasterId equals date.MasterId
                       where itinerary.MasterId == id
                       select new
                       {
@@ -54,7 +55,9 @@ namespace EtourBackFinal.Controllers
                           cost.ChildWithoutBed,
                           cost.ValidFrom,
                           cost.ValidTo,
-                          category.CategoryName
+                          category.CategoryName,
+                          date.DepartureDate,
+                          date.EndDate
                       };
 /*
             if (itnerary_Master == null)

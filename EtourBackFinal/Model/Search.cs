@@ -7,9 +7,9 @@
 
         public DateTime EndDate { get; set; }  
 
-        public double MinCost { get; set; }
+        public double Cost { get; set; }
 
-        public double MaxCost { get; set; }
+      
 
         public int NoOfDays { get; set; }
     }

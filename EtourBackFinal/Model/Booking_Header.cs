@@ -42,7 +42,7 @@ namespace EtourBackFinal.Model
         [ForeignKey("DepartureId")]
         public Date_Master? DateMaster { get; set;}
 
-        public ICollection<Passenger_Master>? Passengers { get; set; }
+       /* public ICollection<Passenger_Master>? Passengers { get; set; }*/
 
 
     }

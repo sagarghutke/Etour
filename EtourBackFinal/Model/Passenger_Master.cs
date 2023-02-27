@@ -33,17 +33,20 @@ namespace EtourBackFinal.Model
         [ForeignKey("CustomerId")]
         public Customer_Master? Customer { get; set; }
 
-        public DateTime? DepartueId { get; set; }
+        public DateTime? DepartueDate { get; set; }
+
+
+        public string PassengerType { get; set; }
 
 
 
-
+/*
         //[Required]  
         public int? BookingId { get; set; }
 
         [ForeignKey("BookingId")]
         public Booking_Header? BookingHeader { get; set; }
-
+*/
 
     }
 }

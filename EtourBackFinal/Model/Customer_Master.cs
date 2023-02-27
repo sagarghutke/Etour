@@ -54,7 +54,8 @@ namespace EtourBackFinal.Model
         public string IdVerificationType { get; set; }
 
         [Required]
-        public Gender Gender { get; set; }
+        [MaxLength(6)]
+        public string Gender { get; set; }
 
         public ICollection<Booking_Header>? BookingHeaders { get; set; }
 

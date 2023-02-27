@@ -35,9 +35,12 @@ namespace EtourBackFinal.Controllers
 
             var customer = await _context.CustomerMaster.FirstOrDefaultAsync((customer) => customer.PhoneNumber == login.PhoneNo && customer.Password == login.Password);
 
-            if(login.PhoneNo.Equals(customer.PhoneNumber) && login.Password.Equals(customer.Password))
+            if(customer != null)
             {
-                return Ok(customer);
+                if (login.PhoneNo.Equals(customer.PhoneNumber) && login.Password.Equals(customer.Password))
+                {
+                    return Ok(customer);
+                }
             }
 
 

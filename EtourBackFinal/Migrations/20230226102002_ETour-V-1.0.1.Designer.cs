@@ -4,6 +4,7 @@ using EtourBackFinal.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EtourBackFinal.Migrations
 {
     [DbContext(typeof(ETourContext))]
-    partial class ETourContextModelSnapshot : ModelSnapshot
+    [Migration("20230226102002_ETour-V-1.0.1")]
+    partial class ETourV101
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,8 +170,7 @@ namespace EtourBackFinal.Migrations
 
                     b.Property<string>("Gender")
                         .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdVerificationType")
                         .IsRequired()
@@ -226,7 +228,8 @@ namespace EtourBackFinal.Migrations
 
                     b.Property<string>("Itnerarydetails")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int?>("MasterId")
                         .HasColumnType("int");
