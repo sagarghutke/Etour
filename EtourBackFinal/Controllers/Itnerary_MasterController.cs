@@ -55,6 +55,7 @@ namespace EtourBackFinal.Controllers
                           cost.ChildWithoutBed,
                           cost.ValidFrom,
                           cost.ValidTo,
+                          category.CategoryImage,
                           category.CategoryName,
                           date.DepartureDate,
                           date.EndDate

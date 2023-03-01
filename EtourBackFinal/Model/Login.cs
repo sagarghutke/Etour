@@ -6,8 +6,8 @@ namespace EtourBackFinal.Model
     {
         public int LoginId { get; set; }
 
-        [Phone]
-        public string PhoneNo { get; set; }
+        
+        public string PhoneNumber { get; set; }
 
         [Required]
         [MinLength(8)]

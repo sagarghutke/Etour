@@ -4,6 +4,7 @@ using EtourBackFinal.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EtourBackFinal.Migrations
 {
     [DbContext(typeof(ETourContext))]
-    partial class ETourContextModelSnapshot : ModelSnapshot
+    [Migration("20230228072254_ETour-V-1.1.2")]
+    partial class ETourV112
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -284,9 +287,6 @@ namespace EtourBackFinal.Migrations
                         .IsRequired()
                         .HasMaxLength(6)
                         .HasColumnType("nvarchar(6)");
-
-                    b.Property<double>("PassengerCost")
-                        .HasColumnType("float");
 
                     b.Property<string>("PassengerName")
                         .IsRequired()

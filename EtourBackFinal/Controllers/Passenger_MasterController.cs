@@ -58,7 +58,7 @@ namespace EtourBackFinal.Controllers
                 return NotFound();
             }
 
-            var passenger_Master  = await _context.Passengers.Where((p)=> p.CustomerId == id && p.DepartueDate == date).FirstOrDefaultAsync();
+            var passenger_Master  = await _context.Passengers.Where((p)=> p.CustomerId == id && p.DepartureDate == date).FirstOrDefaultAsync();
 
             /*if(passenger_Master ==  null)
             {

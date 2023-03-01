@@ -25,18 +25,18 @@ namespace EtourBackFinal.Model
         [StringLength(6)]
         public string Gender { get; set; }
 
-        /*[Required]
-        public double PassengerCost { get;set; }*/
+        [Required]
+        public double PassengerCost { get; set; }
 
         public int? CustomerId { get; set; }    
 
         [ForeignKey("CustomerId")]
         public Customer_Master? Customer { get; set; }
 
-        public DateTime? DepartueDate { get; set; }
+        public DateTime? DepartureDate { get; set; }
 
 
-        public string PassengerType { get; set; }
+        public string? PassengerType { get; set; }
 
 
 
