@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EtourBackFinal.Model
@@ -42,7 +43,8 @@ namespace EtourBackFinal.Model
         [ForeignKey("DepartureId")]
         public Date_Master? DateMaster { get; set;}
 
-       /* public ICollection<Passenger_Master>? Passengers { get; set; }*/
+        [JsonIgnore]
+        public ICollection<Passenger_Master>? Passengers { get; set; }
 
 
     }

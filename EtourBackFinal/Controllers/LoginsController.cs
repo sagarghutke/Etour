@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EtourBackFinal.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using EtourBackFinal.Model;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace EtourBackFinal.Controllers
 {
@@ -20,33 +18,57 @@ namespace EtourBackFinal.Controllers
             _context = context;
         }
 
-       
-
         // POST: api/Logins
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<Login>>> PostLogin(Login login)
+        public async Task<ActionResult<LoginResponse>> PostLogin(LoginRequest request)
         {
-          if (login == null)
-          {
-              return Problem("Enter Data to Login");
-          }
-            
-
-            var customer = await _context.CustomerMaster.FirstOrDefaultAsync((customer) => customer.PhoneNumber == login.PhoneNumber && customer.Password == login.Password);
-
-            if(customer != null)
+            string pass = null;
+            if (request != null)
             {
-                if (login.PhoneNumber.Equals(customer.PhoneNumber) && login.Password.Equals(customer.Password))
+                pass = HashPassword(request.Password);
+            }
+
+            var customer = await _context.CustomerMaster.FirstOrDefaultAsync(_customers => _customers.PhoneNumber.Equals(request.PhoneNumber) && _customers.Password.Equals(pass));
+
+            if (customer != null)
+            {
+                if (customer.PhoneNumber.Equals(request.PhoneNumber) && customer.Password.Equals(pass))
                 {
-                    return Ok(customer);
+                    return Ok(new LoginResponse { Success = true, Customer = customer });
                 }
             }
 
-
-            return BadRequest("Invalid PhoneNo. OR Password") ;
+            return BadRequest("Invalid PhoneNo. OR Password");
         }
 
-       
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // Convert the password to a byte array and compute the hash
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                // Convert the hashed byte array back to a string and return it
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
+    }
+
+    public class LoginRequest
+    {
+        public string PhoneNumber { get; set; }
+        public string Password { get; set; }
+    }
+
+    public class LoginResponse
+    {
+        public bool Success { get; set; }
+        public Customer_Master Customer { get; set; }
     }
 }

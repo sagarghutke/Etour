@@ -550,3 +550,4 @@ E:\C#\ETOUR\EtourBackFinal\obj\Debug\net7.0\refint\EtourBackFinal.dll
 E:\C#\ETOUR\EtourBackFinal\obj\Debug\net7.0\EtourBackFinal.pdb
 E:\C#\ETOUR\EtourBackFinal\obj\Debug\net7.0\EtourBackFinal.genruntimeconfig.cache
 E:\C#\ETOUR\EtourBackFinal\obj\Debug\net7.0\ref\EtourBackFinal.dll
+E:\C#\ETOUR\EtourBackFinal\bin\Debug\net7.0\Serilog.dll

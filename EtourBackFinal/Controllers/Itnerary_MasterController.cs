@@ -57,7 +57,9 @@ namespace EtourBackFinal.Controllers
                           cost.ValidTo,
                           category.CategoryImage,
                           category.CategoryName,
+                          category.MasterId,
                           date.DepartureDate,
+                          date.DepartureId,
                           date.EndDate
                       };
 /*

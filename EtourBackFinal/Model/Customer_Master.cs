@@ -30,15 +30,15 @@ namespace EtourBackFinal.Model
         [StringLength(30)]
         public string Email { get; set; }
 
-        [Required, NotNull]
-        [MaxLength(15,ErrorMessage ="Length Can't exceed 15 Characters")]
+        [Required]
+        /*[MaxLength(15,ErrorMessage ="Length Can't exceed 15 Characters")]
         [MinLength(8,ErrorMessage ="Length Can't be less than 8 Characters")]
-        [DataType(DataType.Password)]
+        [DataType(DataType.Password)]*/
         public string Password { get; set; }
 
         [Required]
-        [RegularExpression(@"^[0-9]*$")]
-        [StringLength(10,ErrorMessage ="Enter valid phone number")]
+       /* [RegularExpression(@"^[0-9]*$")]
+        [StringLength(10,ErrorMessage ="Enter valid phone number")]*/
         public string PhoneNumber { get; set; }
 
         [Required]
@@ -59,6 +59,6 @@ namespace EtourBackFinal.Model
 
         public ICollection<Booking_Header>? BookingHeaders { get; set; }
 
-        public ICollection<Passenger_Master>? Passengers { get; set; }
+        /*public ICollection<Passenger_Master>? Passengers { get; set; }*/
     }
 }

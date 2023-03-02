@@ -39,14 +39,20 @@ namespace EtourBackFinal.Controllers
           {
               return NotFound();
           }
-            var passenger_Master = await _context.Passengers.FindAsync(id);
-
-            if (passenger_Master == null)
+            var customer_Master = await _context.CustomerMaster.FindAsync(id);
+/*
+            if(customer_Master != null) 
             {
-                return NotFound();
-            }
+                var passenger_Master = await _context.Passengers.Where((p) => p.CustomerId == customer_Master.CustomerId).ToListAsync();
+                if (passenger_Master == null)
+                {
+                    return NotFound();
+                }
+                return Ok(passenger_Master);
+            }*/
 
-            return passenger_Master;
+            return BadRequest("Passenger dosent exist");
+           
         }
 
         //GET:api/Passenger_Master/1/2022-02-22
@@ -58,7 +64,7 @@ namespace EtourBackFinal.Controllers
                 return NotFound();
             }
 
-            var passenger_Master  = await _context.Passengers.Where((p)=> p.CustomerId == id && p.DepartureDate == date).FirstOrDefaultAsync();
+            var passenger_Master  = await _context.Passengers.Where((p)=> p.BookingId == id ).FirstOrDefaultAsync();
 
             /*if(passenger_Master ==  null)
             {
